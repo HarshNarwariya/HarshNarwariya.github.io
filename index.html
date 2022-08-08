@@ -1,28 +1,307 @@
-<!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<head>
+    <title>DSA/HarshNarwariya</title>
+</head>
+
 <body>
+    <div class="full-screen-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="main">
+        <div class="topnav" id="myTopnav">
+            <div class="tab active">LC75</div>
+            <div class="tab">Algorithms</div>
+            <div class="tab">Programs</div>
+            <div class="tab">Webs</div>
+        </div>
+        <div class="content">
+            <div id="lc75">
 
-<div class="w3-container">
-  <h2>Displaying Panels</h2>
-  <p>Panels are the same as containers except for an added top and bottom margin.</p>
-
-  <div class="w3-panel w3-red">
-    <p>I am a panel.</p>
-  </div>
-  <div class="w3-panel w3-green">
-    <p>I am a panel.</p>
-  </div>
-
-  <div class="w3-container w3-red">
-    <p>I am a container.</p>
-  </div>
-  <div class="w3-container w3-green">
-    <p>I am a container.</p>
-  </div>
-</div>
-
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function writeLC75(data, filters) {
+        let trs = "";
+        let easy = 0, medium = 0, hard = 0;
+        let totalEasy = 0, totalMedium = 0, totalHard = 0;
+        let totalSolved = 0;
+        data.forEach((item, index) => {
+            trs += `
+                <tr class="row">
+                    <td>${item.Status ? "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='1em' height='1em' fill='green' class='h-[12px] w-[12px] text-green-s dark:text-dark-green-s'><path fill-rule='evenodd' d='M9.688 15.898l-3.98-3.98a1 1 0 00-1.415 1.414L8.98 18.02a1 1 0 001.415 0L20.707 7.707a1 1 0 00-1.414-1.414l-9.605 9.605z' clip-rule='evenodd'></path></svg>" : "--"}</td>
+                    <td>${index + 1}. ${item.Problem}</td>
+                    <td>${item.Solution == "#" ? "--" : `<a href="${item.Solution}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="green" class="h-10 w-10 text-blue dark:text-dark-blue"><path d="M15.207 11.293a1 1 0 010 1.414l-3.5 3.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L11 14.086l2.793-2.793a1 1 0 011.414 0z"></path><path d="M4 5a3 3 0 013-3h7.039a3 3 0 012.342 1.126l2.962 3.701A3 3 0 0120 8.702V19a3 3 0 01-3 3H7a3 3 0 01-3-3V5zm3-1a1 1 0 00-1 1v14a1 1 0 001 1h10a1 1 0 001-1V9h-3a2 2 0 01-2-2V4H7zm8 .6V7h1.92L15 4.6z"></path></svg></a>`}</td>
+                    <td><a href="${item.Question}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="white" class="h-10 w-10 text-blue dark:text-dark-blue"><path d="M15.207 11.293a1 1 0 010 1.414l-3.5 3.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L11 14.086l2.793-2.793a1 1 0 011.414 0z"></path><path d="M4 5a3 3 0 013-3h7.039a3 3 0 012.342 1.126l2.962 3.701A3 3 0 0120 8.702V19a3 3 0 01-3 3H7a3 3 0 01-3-3V5zm3-1a1 1 0 00-1 1v14a1 1 0 001 1h10a1 1 0 001-1V9h-3a2 2 0 01-2-2V4H7zm8 .6V7h1.92L15 4.6z"></path></svg></a></td>
+                    <td>${item.Tag}</td>
+                    <td class="${item.Difficulty}">${item.Difficulty}</td>
+                </tr>
+            `;
+            if (item.Status) {
+                if (item.Difficulty == "Easy") {
+                    easy+=1;
+                } if (item.Difficulty == "Medium") {
+                    medium += 1;
+                } if (item.Difficulty == "Hard") {
+                    hard += 1;
+                }
+            }
+            if (item.Difficulty == "Easy") {
+                    totalEasy+=1;
+            } if (item.Difficulty == "Medium") {
+                    totalMedium += 1;
+            } if (item.Difficulty == "Hard") {
+                    totalHard += 1;
+            }
+            totalSolved += item.Status;
+        })
+        $("#lc75").html(`
+            <div class="lc75-two-columns">
+                <div class="lc75-table">
+                    <table>
+                        <tr>
+                            <th>Status</th>
+                            <th>Title</th>
+                            <th>Solution</th>
+                            <th>QA Link</th>
+                            <th>Tag</th>
+                            <th>Difficulty</th>
+                        </tr>
+                        ${trs}
+                        <tr>
+                            
+                        </tr>
+                        </table>
+                </div>
+                <div class="lc75-details">
+                    <div style="text-align: center; margin-bottom: 12px;">Difficulties</div>
+                    <div class="lc75-card">
+                        <div class="difficulties">
+                            <div class="Easy" style="margin-bottom: 12px;">Easy</div>
+                            <div class="Medium" style="margin-bottom: 12px;">Medium</div>
+                            <div class="Hard" style="margin-bottom: 12px;">Hard</div>
+                            <div>Solved</div>
+                        </div>
+                        <div class="done">
+                            <div style="margin-bottom: 12px;">${easy}/<small>${totalEasy}</small></div>
+                            <div style="margin-bottom: 12px;">${medium}/<small>${totalMedium}</small></div>
+                            <div style="margin-bottom: 12px;">${hard}/<small>${totalHard}</small></div>
+                            <div>${totalSolved}</div>
+                        </div>
+                    </div>
+                    <style>
+                        .lc75-details {
+                            padding: 25px;
+                        }
+
+                        .lc75-card {
+                            width: 200px;
+                            background-color: rgb(40, 40, 40);
+                            padding: 30px;
+                            border-radius: 25px;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                    </style>
+                </div>
+            </div>
+            <style>
+                .lc75-two-columns {
+                    display: flex;
+                    padding: 20px;
+                    margin-top: 30px;
+                }
+                .lc75-table {
+                    background-color: rgb(40, 40, 40);
+                    padding: 12px;
+                    width: 50vw;
+                    overflow-x: auto;
+                    font-family: arial, sans-serif;
+                    border-radius: 25px;
+                }
+
+                .lc75-table tr:nth-child(1) th {
+                    border-bottom: 2px white solid;
+                    margin-bottom: 20px;
+                }
+
+                .lc75-table * {
+                    font-size: 14px;
+                }
+                .lc75-table td, .lc75-table th {
+                    text-align: left;
+                    padding: 12px;
+                    margin: 0px;
+                }
+
+                .Easy {
+                    color: rgb(53, 164, 145);
+                }
+
+                .Medium {
+                    color: rgb(246, 182, 50);
+                }
+
+                .Hard {
+                    color: rgb(209, 70, 91);
+                }
+
+                .lc75-table .row {
+                    transition: 0.35s all;
+                }
+
+                .lc75-table .row:hover {
+                    background-color: rgb(26, 26, 26);
+                }
+            </style> 
+        `);
+    }
+</script>
+<style>
+    /* .li {
+        font-size: 12px;
+    } */
+</style>
+<script>
+    var lc75;
+    $(document).ready(() => {
+        fetch("https://raw.githubusercontent.com/HarshNarwariya/DSA/main/Blind%2075%20Must%20Do%20Leetcode/Leetcode%2075%20Problems.json")
+            .then(response => response.json())
+            .then(response => {
+                lc75 = response;
+                $(".full-screen-loader").fadeOut(200);
+                writeLC75(lc75);
+                $(".main").fadeIn(600);
+            }).catch(() => {
+                alert("Error Found Please Refresh")
+            });
+    })
+</script>
+<script>
+    $(".tab").click((event) => {
+        $(".tab").removeClass("active");
+        event.target.classList.add("active");
+    })
+</script>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(26, 26, 26);
+        color: rgb(160, 160, 160);
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: rgb(40, 40, 40);
+        cursor: pointer;
+    }
+
+    .topnav div {
+        float: left;
+        display: block;
+        color: rgb(160, 160, 160);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .topnav div:hover {
+        color: rgb(216, 216, 216);
+        border-bottom: 2px black solid;
+    }
+
+    .topnav div.active {
+        color: white;
+        border-bottom: 2px white solid;
+    }
+
+    .topnav .icon {
+        display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav div:not(:first-child) {
+            display: none;
+        }
+
+        .topnav div.icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+
+        .topnav.responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+    }
+</style>
+<style>
+    .main {
+        display: none;
+    }
+
+    .full-screen-loader {
+        position: absolute;
+        width: 98vw;
+        height: 98vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        /* background-color: #d2d2d2; */
+    }
+
+    .loader {
+        /* box-shadow: 0 0 50px #3498db; */
+        border: 4px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        /* background-color: #2f6c94; */
+        width: 48px;
+        height: 48px;
+        -webkit-animation: spin 0.75s linear infinite;
+        /* Safari */
+        animation: spin 0.75s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
 </html>
